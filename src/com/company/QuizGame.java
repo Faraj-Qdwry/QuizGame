@@ -2,6 +2,12 @@ package com.company;
 
 import java.io.IOException;
 import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 
 public class QuizGame {
 
@@ -594,15 +600,49 @@ public class QuizGame {
 
     }
 
-
     static void show_record() {
         clear();
-        //todo
+        File file=new File("score.txt");
+        float score;
+        float max=0;
+        String s=null;
+        Scanner scanner=new Scanner(file);
+        
+        while(scanner.hasNextLine()){
+        
+            String [] str= scanner.nextLine().split(":");
+            String part1=str[0];
+            String part2=str[1];
+  
+            
+             score=Float.parseFloat(part2);
+            
+                if (score>max) {
+                 max=score;
+                 s=part1;
+              }
+                System.out.println("------------------------------------------------------");
+                
+                System.out.println(part1.toUpperCase()+" has secured the Highest Score with "+part2);
+               
+        }
+             System.out.println("------------------------------------------------------");
+                  
+             System.out.println(" ");
+             System.out.println("*****************************************************");
+             System.out.println("Overall highest score is by "+s.toUpperCase()+" with score "+max);
+             System.out.println("*****************************************************");
     }
 
     static void reset_score() {
-        clear();
-        //todo
+        try {
+            FileWriter fw = new FileWriter("score.txt");
+            PrintWriter pw= new PrintWriter(fw);
+            pw.print("");
+            pw.close();
+            
+        } catch (Exception e) {
+        }
     }
 
     static void help() {
@@ -628,7 +668,14 @@ public class QuizGame {
 
     static void edit_score(float score, String plnm) {
         clear();
-        //todo
+        try {
+            FileWriter fw = new FileWriter("score.txt");
+            PrintWriter pw= new PrintWriter(fw);
+            pw.print("");
+            pw.close();
+            
+        } catch (Exception e) {
+        }
     }
 
 }
